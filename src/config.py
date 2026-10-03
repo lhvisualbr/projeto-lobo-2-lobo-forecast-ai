@@ -79,7 +79,7 @@ SUPPLIERS = [
 ]
 
 # --------------------------------------------------------------------------
-# Motor de reposição (parâmetros usados nas versões futuras V0.4)
+# Motor de reposição (parâmetros atuais)
 # --------------------------------------------------------------------------
 DEFAULT_SERVICE_FACTOR = 1.65  # aproximação de ~95% de nível de serviço
 REVIEW_PERIOD_WEEKS = 1

@@ -25,7 +25,7 @@ por margem pequena no teste one-step-ahead (WAPE 27,56% vs. 27,66%) e no
 backtest multi-horizon consolidado — mas a média móvel de 4 semanas
 **vence o modelo em H+3 e H+4** no backtest recursivo, por margem também
 pequena. Isso é reportado sem maquiagem nos dois sentidos. O motor de
-reposição resultante identificou **1 SKU crítico** entre 30, com sugestão
+reposição resultante identificou **3 SKUs críticos** entre 30, com sugestão
 de reposição auditável linha a linha.
 
 ## Problema

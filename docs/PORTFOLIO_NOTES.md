@@ -1,6 +1,6 @@
 # Projeto Lobo 2 — PORTFOLIO_NOTES.md (Lobo Forecast AI)
 
-## Como apresentar o projeto (V1.1 — pronto)
+## Como apresentar o projeto (V1.1.1 — validação final)
 
 > "Lobo Forecast AI — estudo de caso autoral de previsão de consumo e
 > reposição industrial (dados 100% sintéticos). Estruturei dados
@@ -14,7 +14,7 @@
 > nos dois sentidos. A partir do forecast, construí um motor de reposição
 > auditável (estoque de segurança, estoque-alvo, prioridade, com as
 > convenções de risco documentadas) e um dashboard em Streamlit com 5
-> páginas. 59 testes automatizados (incluindo teste de integração de
+> páginas. 64 testes automatizados (incluindo teste de integração de
 > pipeline), lint limpo, CI configurada, pipeline reproduzível do zero em
 > pasta limpa com dependências fixadas."
 
@@ -26,7 +26,7 @@ independente antes de qualquer publicação (ver `docs/CHANGELOG.md`).
 - Python (Pandas, NumPy) para geração e validação de dados.
 - SQL / SQLite (schema, chaves estrangeiras, constraints, consultas
   analíticas).
-- Testes automatizados com pytest (59 testes, incluindo teste de
+- Testes automatizados com pytest (64 testes, incluindo teste de
   integração de pipeline via subprocess) e lint limpo (ruff).
 - Modelagem de dados para série temporal (calendário semanal, preservação
   de semanas zero, convenção temporal explícita de snapshot de estoque).

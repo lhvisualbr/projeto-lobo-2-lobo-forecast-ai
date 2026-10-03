@@ -147,7 +147,7 @@ sem troca de modelo — apenas engenharia de performance e verificação final.
   reposição) contra os valores de referência já auditados da V1.1, com
   tolerância numérica explícita (não comparação textual frágil). Pulados
   automaticamente se os artefatos ainda não existirem.
-- **CI dividida em dois workflows** (`fast-suite` e
+- **CI organizada em dois jobs no mesmo workflow** (`fast-suite` e
   `full-release-validation`): a suíte rápida (todo push/PR) usa o smoke
   test reduzido; o backtest completo com as 41 origens de produção agora
   roda apenas sob demanda (`workflow_dispatch`), como validação de
