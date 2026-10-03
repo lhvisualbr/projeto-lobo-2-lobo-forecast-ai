@@ -174,8 +174,15 @@ Exploração completa, com fato observado separado de hipótese, em
 - Não requer `.env` nem variáveis de ambiente.
 - O banco `database/lobo_forecast.db` é criado pelo próprio pipeline.
 
-> A URL real de `git clone` será adicionada após a publicação no GitHub
-> e a validação final a partir de um clone limpo.
+### Clonar o repositório
+
+```powershell
+git clone https://github.com/lhvisualbr/projeto-lobo-2-lobo-forecast-ai.git
+cd projeto-lobo-2-lobo-forecast-ai
+```
+
+O repositório público já foi criado. A validação final de reprodutibilidade
+por clone limpo será executada após o primeiro `push` da V1.1.1.
 
 ### Ambiente virtual — Windows PowerShell
 
@@ -219,8 +226,8 @@ A V1.1.1 foi validada localmente no Windows com Python 3.12.10, `.venv`,
 pipeline completo, SQLite, 64 testes, Ruff e Streamlit em
 `http://localhost:8501`.
 
-A validação final ainda depende da publicação do repositório, da URL real
-de `git clone` e de uma execução a partir de um clone público limpo.
+A validação final ainda depende do primeiro `push` da V1.1.1 e de uma
+execução completa a partir de um clone público limpo.
 
 ## Qualidade e testes
 
