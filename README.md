@@ -11,7 +11,7 @@ gerar sugestões auditáveis de reposição de estoque.
 > de empresa, colaborador, fornecedor ou processo interno foi utilizado.
 
 **Status: V1.1.1 — Performance & Final Verification.** Pipeline completo,
-testado e reprodutível de ponta a ponta: dados sintéticos → SQL → EDA →
+testado localmente de ponta a ponta: dados sintéticos → SQL → EDA →
 forecast → backtest multi-horizon (otimizado, ~3x mais rápido, mesma
 metodologia e mesmos números da V1.1) → motor de reposição → dashboard → CI.
 
@@ -138,19 +138,18 @@ por SKU, a fórmula completa e a **razão em texto** da prioridade. Nada de
 
 ## Dashboard (Streamlit)
 
-```bash
-cd Projeto_Lobo_2_Lobo_Forecast_AI_v1.1.1/src
-streamlit run app.py
+```powershell
+.\.venv\Scripts\python.exe -m streamlit run src/app.py
 ```
 
 5 páginas: **Visão Geral** (KPIs, materiais prioritários, real x previsto),
-**Forecast** (histórico/teste/futuro por produto), **Estoque** (tabela
+**Previsão** (histórico/teste/futuro por produto), **Estoque** (tabela
 auditável com filtros), **Qualidade do Modelo** (modelo x baselines, erro
 por categoria/SKU) e **Dados** (perfil do dataset sintético).
 
-| Visão Geral | Forecast |
+| Visão Geral | Previsão |
 |---|---|
-| ![Visão Geral](images/dashboard_visao_geral.png) | ![Forecast](images/dashboard_forecast.png) |
+| ![Visão Geral](images/dashboard_visao_geral.png) | ![Previsão](images/dashboard_forecast.png) |
 
 | Estoque | Qualidade do Modelo |
 |---|---|
@@ -164,25 +163,41 @@ por categoria/SKU) e **Dados** (perfil do dataset sintético).
 Exploração completa, com fato observado separado de hipótese, em
 `notebooks/02_eda.ipynb`.
 
-## Como executar (pasta limpa, testado do zero)
+## Quick Start / Como executar
 
-```bash
-cd Projeto_Lobo_2_Lobo_Forecast_AI_v1.1.1
-pip install -r requirements.txt   # versões fixas — ver .python-version (3.12)
+### Pré-requisitos
 
-python src/generate_data.py        # gera data/raw/*.csv (dados sintéticos)
-python src/validate_data.py        # valida integridade e ausência de PII
-python src/database.py             # recria database/lobo_forecast.db e carrega os dados
-python src/data_prep.py            # constrói a série semanal produto x semana
-python src/run_evaluation.py       # treina o modelo, roda a avaliação one-step-ahead
-python src/backtest_multihorizon.py  # backtest rolling-origin H+1..H+4 (~40s, medido — ver docs/PERFORMANCE_AUDIT.md)
-python src/forecast.py             # gera o forecast recursivo das próximas 4 semanas
-python src/replenishment.py        # calcula estoque-alvo, quantidade sugerida e prioridade
+- Python 3.12 — validado localmente com Python 3.12.10.
+- Dependências fixadas em `requirements.txt`.
+- Não requer Docker nesta versão.
+- Não requer servidor de banco externo: a V1.1.1 utiliza SQLite.
+- Não requer `.env` nem variáveis de ambiente.
+- O banco `database/lobo_forecast.db` é criado pelo próprio pipeline.
 
-pytest tests/ -v                   # roda os 64 testes automatizados (~15s)
-ruff check src/ tests/             # lint — 0 problemas
+> A URL real de `git clone` será adicionada após a publicação no GitHub
+> e a validação final a partir de um clone limpo.
 
-cd src && streamlit run app.py     # abre o dashboard em http://localhost:8501
+### Ambiente virtual — Windows PowerShell
+
+```powershell
+py -3.12 --version
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip check
+
+.\.venv\Scripts\python.exe src/generate_data.py        # gera data/raw/*.csv (dados sintéticos)
+.\.venv\Scripts\python.exe src/validate_data.py        # valida integridade e ausência de PII
+.\.venv\Scripts\python.exe src/database.py             # recria database/lobo_forecast.db e carrega os dados
+.\.venv\Scripts\python.exe src/data_prep.py            # constrói a série semanal produto x semana
+.\.venv\Scripts\python.exe src/run_evaluation.py       # treina o modelo, roda a avaliação one-step-ahead
+.\.venv\Scripts\python.exe src/backtest_multihorizon.py  # backtest rolling-origin H+1..H+4 (~40s, medido — ver docs/PERFORMANCE_AUDIT.md)
+.\.venv\Scripts\python.exe src/forecast.py             # gera o forecast recursivo das próximas 4 semanas
+.\.venv\Scripts\python.exe src/replenishment.py        # calcula estoque-alvo, quantidade sugerida e prioridade
+
+.\.venv\Scripts\python.exe -m pytest -q                   # roda os 64 testes automatizados (~15s)
+.\.venv\Scripts\python.exe -m ruff check .             # lint — 0 problemas
+
+.\.venv\Scripts\python.exe -m streamlit run src/app.py     # abre o dashboard em http://localhost:8501
 ```
 
 > **Importante:** rodar `pytest` inclui um smoke test reduzido do backtest
@@ -192,15 +207,20 @@ cd src && streamlit run app.py     # abre o dashboard em http://localhost:8501
 > resultados de produção só existirão depois de rodar esse comando pelo
 > menos uma vez.
 
-Para explorar as consultas SQL de negócio:
+### SQL opcional
 
-```bash
-sqlite3 database/lobo_forecast.db < sql/analysis_queries.sql
-```
+O executável externo `sqlite3` não é requisito para executar o projeto.
+O banco SQLite é criado e utilizado pelo próprio Python. O arquivo
+`sql/analysis_queries.sql` contém consultas adicionais para exploração manual.
 
-Este fluxo foi executado do zero em pasta limpa múltiplas vezes durante o
-desenvolvimento (um clone novo, sem nenhum estado anterior) — ver
-`docs/TEST_REPORT.md`.
+### Estado da reprodutibilidade
+
+A V1.1.1 foi validada localmente no Windows com Python 3.12.10, `.venv`,
+pipeline completo, SQLite, 64 testes, Ruff e Streamlit em
+`http://localhost:8501`.
+
+A validação final ainda depende da publicação do repositório, da URL real
+de `git clone` e de uma execução a partir de um clone público limpo.
 
 ## Qualidade e testes
 
@@ -222,8 +242,9 @@ desenvolvimento (um clone novo, sem nenhum estado anterior) — ver
   `docs/PERFORMANCE_AUDIT.md`.
 - **3 notebooks executados de verdade** (`notebooks/`), com outputs reais
   embutidos: qualidade de dados, EDA e análise do modelo.
-- Reprodutibilidade confirmada em pasta limpa a cada versão entregue, com
-  dependências fixadas (`requirements.txt` com `==`, `.python-version`).
+- Reprodutibilidade local da V1.1.1 validada com dependências fixadas
+  (`requirements.txt` com `==`, `.python-version`); a validação final por
+  clone público será feita após a publicação do repositório.
 
 ## Documentos
 

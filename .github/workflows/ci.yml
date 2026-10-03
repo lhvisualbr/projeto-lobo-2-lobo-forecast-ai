@@ -1,6 +1,6 @@
 name: CI
 
-# Dois workflows distintos e documentados (V1.1.1):
+# Dois jobs distintos no mesmo workflow de CI (V1.1.1):
 #
 # 1. `fast-suite` — roda em TODO push e pull request. Rápida (~1 min):
 #    lint + pipeline essencial + suíte de testes. A suíte de testes já
