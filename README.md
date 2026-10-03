@@ -272,6 +272,19 @@ one-step-ahead e o backtest multi-horizon medem coisas diferentes e não
 devem ser comparados diretamente. A reposição é sempre uma **sugestão
 auditável**, nunca uma compra automática — a decisão final é humana.
 
+## Autoria e licença
+
+**Autor:** Luis Henrique de Oliveira Ribeiro (LH Visual)
+
+Este repositório é disponibilizado publicamente para demonstração de
+portfólio, avaliação técnica, estudo e processos de recrutamento.
+
+O código **não é distribuído sob licença open source** e não concede
+autorização automática para uso comercial, redistribuição ou incorporação
+em produtos e sistemas de terceiros.
+
+Consulte o arquivo `LICENSE` para os termos completos de uso.
+
 ## Próximos passos (fora do escopo desta versão)
 
 - Croston/SBA para os SKUs mais intermitentes, se uma necessidade real
