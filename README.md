@@ -1,20 +1,50 @@
 # 🐺 Lobo Forecast AI
+[![Version](https://img.shields.io/badge/version-v1.1.1-blue)](https://github.com/lhvisualbr/projeto-lobo-2-lobo-forecast-ai/releases/tag/v1.1.1)
+[![Tests](https://img.shields.io/badge/tests-64%2F64%20PASS-brightgreen)](#)
+[![CI](https://github.com/lhvisualbr/projeto-lobo-2-lobo-forecast-ai/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lhvisualbr/projeto-lobo-2-lobo-forecast-ai/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/Python-3.12-blue)](#)
+[![Data](https://img.shields.io/badge/data-100%25%20synthetic-orange)](#)
+[![Release](https://img.shields.io/badge/release-v1.1.1-success)](https://github.com/lhvisualbr/projeto-lobo-2-lobo-forecast-ai/releases/tag/v1.1.1)
 
-**Projeto Lobo 2 — Lobo Forecast AI** · Previsão de Consumo e Reposição Industrial
+### Projeto Lobo 2 — Previsão de Consumo e Reposição Industrial
+### Lobo Project 2 — Industrial Demand Forecasting & Replenishment
 
-Sistema analítico desenvolvido com Python, SQL e Machine Learning para
-prever consumo de materiais industriais, identificar riscos de ruptura e
-gerar sugestões auditáveis de reposição de estoque.
+> **PT-BR:** Sistema analítico desenvolvido com Python, SQL e Machine Learning para prever consumo de materiais industriais, identificar riscos de ruptura e gerar sugestões auditáveis de reposição de estoque.
+>
+> **EN:** Analytical system built with Python, SQL and Machine Learning to forecast industrial material consumption, identify stockout risks and generate auditable inventory replenishment suggestions.
 
 > **Todos os dados utilizados neste projeto são sintéticos e foram criados
 > exclusivamente para fins educacionais e de portfólio.** Nenhum dado real
 > de empresa, colaborador, fornecedor ou processo interno foi utilizado.
 
-**Status: V1.1.1 — Performance & Final Verification.** Pipeline completo,
-testado localmente de ponta a ponta: dados sintéticos → SQL → EDA →
-forecast → backtest multi-horizon (otimizado, ~3x mais rápido, mesma
-metodologia e mesmos números da V1.1) → motor de reposição → dashboard → CI.
+**Status: V1.1.1 — Release oficial congelada e publicada.** Tag `v1.1.1`,
+GitHub Release, pacote ZIP auditado, SHA-256 publicado, CI da tag aprovado,
+`full-release-validation` aprovado e reprodutibilidade confirmada a partir
+de clone público limpo.
+## Release oficial
 
+Versão publicada:
+
+`v1.1.1 — Performance & Final Verification`
+
+Pacote oficial:
+
+`Projeto_Lobo_2_Lobo_Forecast_AI_V1_1_1.zip`
+
+SHA-256:
+
+`BB913D1D95CA73D44B804C44A1422384029477EA58F0D7864734777055B619BB`
+
+Auditoria do pacote:
+
+- 74 arquivos rastreados;
+- 74 arquivos no ZIP;
+- 0 arquivos ausentes;
+- 0 arquivos extras;
+- integridade CRC: **PASS**;
+- checksum SHA-256: **PASS**.
+
+[Ver GitHub Release v1.1.1](https://github.com/lhvisualbr/projeto-lobo-2-lobo-forecast-ai/releases/tag/v1.1.1)
 ---
 
 ## Resultado em uma frase
@@ -245,8 +275,9 @@ problemas e dashboard Streamlit carregado em `http://localhost:8501`.
   não apenas declarado — ver `docs/TEST_REPORT.md`).
 - **CI** com GitHub Actions (`.github/workflows/ci.yml`), dois jobs:
   `fast-suite` (lint + pipeline essencial + testes, todo push/PR, ~1 min)
-  e `full-release-validation` (pipeline + backtest completo, só sob
-  demanda). O workflow está publicado e o `fast-suite` passou no GitHub Actions.
+  e `full-release-validation` (pipeline + backtest completo, sob demanda).
+  Ambos foram executados com sucesso no GitHub Actions, incluindo a
+  validação manual de release e o CI disparado pela tag `v1.1.1`.
 - **Backtest multi-horizon ~3x mais rápido** (121,4s → ~41s) que a V1.1,
   com regressão numérica verificada como exatamente zero — ver
   `docs/PERFORMANCE_AUDIT.md`.
@@ -282,6 +313,59 @@ one-step-ahead e o backtest multi-horizon medem coisas diferentes e não
 devem ser comparados diretamente. A reposição é sempre uma **sugestão
 auditável**, nunca uma compra automática — a decisão final é humana.
 
+---
+
+## 🇺🇸 English
+
+### Overview
+
+**Lobo Forecast AI** is an analytical portfolio project focused on industrial demand forecasting and material replenishment decision support.
+
+The project combines Python, SQL, Machine Learning, SQLite and Streamlit to transform synthetic operational data into reproducible forecasts, stockout-risk signals and auditable replenishment suggestions.
+
+All project data is **100% synthetic**. No real company, employee, supplier or confidential operational data is used.
+
+### Business problem
+
+Industrial inventory teams need to anticipate material consumption without turning forecasts into automatic purchasing decisions.
+
+The project addresses questions such as:
+
+- Which materials may face stockout risk?
+- What is the expected demand for the next four weeks?
+- Which SKUs should receive replenishment attention first?
+- Does the forecasting model actually outperform simple baselines?
+- Can every replenishment suggestion be explained and audited?
+
+The product principle is:
+
+> The model forecasts. The rule calculates. The dashboard explains. The responsible person decides.
+
+### Architecture
+
+```text
+SYNTHETIC DATA
+    ↓
+DATA VALIDATION
+    ↓
+SQLITE DATABASE
+    ↓
+WEEKLY TIME SERIES
+    ↓
+FEATURE ENGINEERING
+    ↓
+BASELINES + RANDOM FOREST
+    ↓
+ONE-STEP-AHEAD EVALUATION
+    ↓
+MULTI-HORIZON BACKTEST (H+1..H+4)
+    ↓
+4-WEEK FORECAST
+    ↓
+REPLENISHMENT ENGINE
+    ↓
+STREAMLIT DASHBOARD
+
 ## Autoria e licença
 
 **Autor:** Luis Henrique de Oliveira Ribeiro (LH Visual)
@@ -303,6 +387,4 @@ Consulte o arquivo `LICENSE` para os termos completos de uso.
 - `service_factor` diferenciado por criticidade do SKU.
 - ETA por pedido em trânsito, para poder considerar `in_transit` na
   classificação de risco de ruptura com segurança (ver `LIMITATIONS.md`).
-- `full-release-validation` manual concluído com sucesso no GitHub Actions.
-  A V1.1.1 está pronta para congelamento e criação da release oficial.
 - Deploy do dashboard (Streamlit Community Cloud ou similar).
