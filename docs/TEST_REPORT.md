@@ -76,19 +76,24 @@ outputs reais embutidos (não são apenas células de código sem saída).
 
 ## CI (GitHub Actions)
 
-Workflow em `.github/workflows/ci.yml`, com **dois jobs distintos**
+Workflow publicado em `.github/workflows/ci.yml`, com **dois jobs distintos**
 (V1.1.1):
 - `fast-suite`: roda em todo push/PR — instala dependências fixas,
-  lint (`ruff`), verificação essencial do pipeline (geração + validação
-  de dados) e a suíte de testes (`pytest tests/`, ~15s, inclui o smoke
-  test reduzido do backtest, não o completo).
-- `full-release-validation`: só roda sob demanda (`workflow_dispatch`) —
+  lint (`ruff`), gera e valida os dados, cria o SQLite com `database.py`
+  e executa a suíte de testes (`pytest tests/`, inclui o smoke test
+  reduzido do backtest, não o completo).
+- `full-release-validation`: roda sob demanda (`workflow_dispatch`) —
   pipeline completo + backtest multi-horizon com as 41 origens de
-  produção (~50s), como validação de release.
+  produção, como validação de release.
 
-Python fixado em 3.12 (ver `.python-version`). Este workflow ainda não
-foi publicado no GitHub — está pronto no repositório local, aguardando a
-publicação (fora do escopo desta etapa).
+O primeiro `fast-suite` público detectou corretamente uma lacuna no
+workflow: os testes de banco eram iniciados antes da criação de
+`database/lobo_forecast.db`. O CI falhou com 1 teste falho e 7 erros em
+`tests/test_database.py`. A causa foi corrigida adicionando
+`python database.py` ao pipeline rápido antes do pytest.
+
+Após a correção, o segundo `fast-suite` público passou no GitHub Actions.
+Python fixado em 3.12 (ver `.python-version`).
 
 ## Performance (medida real, V1.1.1)
 
@@ -119,18 +124,34 @@ ruff check src/ tests/
 cd src && streamlit run app.py    # verificação manual do dashboard
 ```
 
+## Validação por clone público limpo
+
+Foi executada uma reprodução completa a partir de um clone novo do
+repositório público:
+
+`https://github.com/lhvisualbr/projeto-lobo-2-lobo-forecast-ai.git`
+
+Ambiente usado nessa validação:
+- Windows;
+- Python 3.12.10;
+- `.venv` criada do zero;
+- `pip check`: `No broken requirements found.`
+
+Fluxo reproduzido com sucesso:
+dados sintéticos → validação → SQLite → série semanal → avaliação
+one-step-ahead → backtest multi-horizon completo → forecast de 4 semanas
+→ motor de reposição → pytest → Ruff → dashboard Streamlit.
+
+Evidências principais:
+- backtest completo com 41 origens e 4.920 observações por método;
+- distribuição de reposição: 3 CRÍTICA, 1 ALTA, 9 MÉDIA, 17 BAIXA;
+- custo estimado fictício: R$ 21.268,45;
+- `64 passed in 33.84s`;
+- `All checks passed!` no Ruff;
+- dashboard carregado em `http://localhost:8501` com os resultados esperados.
+
 ## O que ainda falta
 
-Nada tecnicamente pendente para a V1.1.1 ser submetida à auditoria
-independente final antes da publicação. Possíveis evoluções futuras
-(fora do escopo desta versão) estão listadas em `README.md` (seção
-"Próximos passos") e em `docs/CHANGELOG.md`.
-
-## Teste end-to-end (pasta limpa)
-
-Executado manualmente nesta sessão, em sequência, a partir de uma pasta
-recém-criada: geração de dados → validação → criação e carga do banco →
-execução das 10 consultas SQL → pipeline completo (incluindo backtest
-multi-horizon) → suíte de testes → lint → notebooks → dashboard. Todas as
-etapas concluíram sem erro e sem dependência de caminho absoluto, arquivo
-oculto ou estado anterior.
+Antes do congelamento final da V1.1.1, falta executar e confirmar o
+`full-release-validation` manual no GitHub Actions e registrar esse
+resultado final na documentação.

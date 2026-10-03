@@ -181,8 +181,9 @@ git clone https://github.com/lhvisualbr/projeto-lobo-2-lobo-forecast-ai.git
 cd projeto-lobo-2-lobo-forecast-ai
 ```
 
-O repositório público já foi criado. A validação final de reprodutibilidade
-por clone limpo será executada após o primeiro `push` da V1.1.1.
+O repositório público foi validado a partir de um **clone novo e limpo**.
+Nesse clone foram recriados o ambiente virtual, as dependências, os dados,
+o banco SQLite e todos os artefatos do pipeline.
 
 ### Ambiente virtual — Windows PowerShell
 
@@ -226,8 +227,10 @@ A V1.1.1 foi validada localmente no Windows com Python 3.12.10, `.venv`,
 pipeline completo, SQLite, 64 testes, Ruff e Streamlit em
 `http://localhost:8501`.
 
-A validação final ainda depende do primeiro `push` da V1.1.1 e de uma
-execução completa a partir de um clone público limpo.
+A reprodutibilidade pública da V1.1.1 foi validada a partir de um clone
+novo do GitHub no Windows com Python 3.12.10: pipeline completo, SQLite,
+backtest multi-horizon, forecast, reposição, **64/64 testes**, Ruff sem
+problemas e dashboard Streamlit carregado em `http://localhost:8501`.
 
 ## Qualidade e testes
 
@@ -243,15 +246,15 @@ execução completa a partir de um clone público limpo.
 - **CI** com GitHub Actions (`.github/workflows/ci.yml`), dois jobs:
   `fast-suite` (lint + pipeline essencial + testes, todo push/PR, ~1 min)
   e `full-release-validation` (pipeline + backtest completo, só sob
-  demanda). Ainda não publicada no GitHub.
+  demanda). O workflow está publicado e o `fast-suite` passou no GitHub Actions.
 - **Backtest multi-horizon ~3x mais rápido** (121,4s → ~41s) que a V1.1,
   com regressão numérica verificada como exatamente zero — ver
   `docs/PERFORMANCE_AUDIT.md`.
 - **3 notebooks executados de verdade** (`notebooks/`), com outputs reais
   embutidos: qualidade de dados, EDA e análise do modelo.
-- Reprodutibilidade local da V1.1.1 validada com dependências fixadas
-  (`requirements.txt` com `==`, `.python-version`); a validação final por
-  clone público será feita após a publicação do repositório.
+- Reprodutibilidade pública da V1.1.1 validada a partir de clone limpo do
+  GitHub, com dependências fixadas (`requirements.txt` com `==`,
+  `.python-version`), pipeline completo, 64/64 testes, Ruff e Streamlit.
 
 ## Documentos
 
@@ -300,5 +303,6 @@ Consulte o arquivo `LICENSE` para os termos completos de uso.
 - `service_factor` diferenciado por criticidade do SKU.
 - ETA por pedido em trânsito, para poder considerar `in_transit` na
   classificação de risco de ruptura com segurança (ver `LIMITATIONS.md`).
-- Publicar o workflow de CI no GitHub (já está pronto localmente).
+- Executar o `full-release-validation` manual no GitHub Actions antes do
+  congelamento final da V1.1.1.
 - Deploy do dashboard (Streamlit Community Cloud ou similar).

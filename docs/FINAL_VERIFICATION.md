@@ -3,8 +3,7 @@
 **Projeto:** Projeto Lobo 2 — Lobo Forecast AI
 **Versão:** V1.1.1 — Performance & Final Verification
 **Data da verificação:** execução real nesta sessão de desenvolvimento
-**Status:** candidata a congelamento final, pendente de auditoria técnica
-independente antes da publicação em GitHub.
+**Status:** publicada no GitHub e validada por clone público limpo; pendente apenas da execução do `full-release-validation` manual antes do congelamento final.
 
 Este documento não usa linguagem de marketing — cada item abaixo é uma
 medição ou um resultado real desta sessão, não uma estimativa.
@@ -108,8 +107,8 @@ reduzida. Corrigido isolando a saída em diretório temporário — ver
   por design (ver `LIMITATIONS.md`).
 - `service_factor` único para todos os SKUs, não diferenciado por
   criticidade.
-- CI pronta (`fast-suite` + `full-release-validation`) mas ainda não
-  publicada no GitHub.
+- CI publicada no GitHub. O `fast-suite` está validado em ambiente limpo;
+  o `full-release-validation` manual ainda será executado antes do freeze final.
 - Croston/SBA não implementada — média móvel seguiu competitiva mesmo no
   backtest multi-horizon (vence em H+3/H+4).
 - Dados 100% sintéticos — nenhuma métrica valida desempenho em operação
@@ -117,6 +116,39 @@ reduzida. Corrigido isolando a saída em diretório temporário — ver
 - Ambiente de desenvolvimento com 1 CPU lógica — otimização de
   performance foi de redução de trabalho redundante, não de
   paralelização; em outra máquina os tempos absolutos mudam.
+
+## Validação pública pós-publicação
+
+A V1.1.1 foi clonada novamente a partir do repositório público:
+
+`https://github.com/lhvisualbr/projeto-lobo-2-lobo-forecast-ai.git`
+
+A validação foi executada em Windows com Python 3.12.10 e uma `.venv`
+criada do zero. As dependências foram instaladas exclusivamente pelo
+`requirements.txt` e `pip check` retornou `No broken requirements found.`
+
+O fluxo público reproduziu com sucesso:
+
+- geração e validação dos dados sintéticos;
+- criação do SQLite;
+- série semanal produto x semana;
+- avaliação one-step-ahead;
+- backtest multi-horizon com 41 origens;
+- forecast de 4 semanas;
+- motor de reposição;
+- 64/64 testes automatizados (`64 passed in 33.84s`);
+- Ruff (`All checks passed!`);
+- dashboard Streamlit em `http://localhost:8501`.
+
+Os resultados reproduzidos permaneceram consistentes com a referência
+documentada, incluindo WAPE consolidado do modelo de 0,250999,
+3 SKUs CRÍTICOS, 1 ALTA, 9 MÉDIA, 17 BAIXA e custo fictício estimado de
+R$ 21.268,45.
+
+O primeiro `fast-suite` público do GitHub Actions detectou uma lacuna no
+workflow: os testes de banco eram executados antes da criação do SQLite.
+A correção adicionou `python database.py` antes do pytest no job rápido.
+Após essa correção, o segundo `fast-suite` passou no GitHub Actions.
 
 ## Critério de conclusão
 
@@ -145,5 +177,6 @@ Todos os critérios da etapa V1.1.1 foram atendidos:
 **PROJETO LOBO 2 — LOBO FORECAST AI V1.1.1**
 **CANDIDATO A CONGELAMENTO FINAL**
 
-Pendente apenas de auditoria técnica independente antes da publicação em
-GitHub e utilização oficial no portfólio. Nenhuma V1.2 foi iniciada.
+Repositório publicado e reprodução pública validada a partir de clone limpo.
+Pendente apenas da execução e confirmação do `full-release-validation`
+manual no GitHub Actions antes do freeze final. Nenhuma V1.2 foi iniciada.
