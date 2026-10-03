@@ -243,7 +243,7 @@ if page == "Visão Geral":
         legend={"orientation": "h", "y": -0.25},
         margin={"l": 10, "r": 10, "t": 10, "b": 10},
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 
 # ==========================================================================
@@ -299,12 +299,12 @@ elif page == "Forecast":
         margin={"l": 10, "r": 10, "t": 30, "b": 10},
         title="Histórico (treino/teste) e forecast futuro",
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
     st.markdown("### Previsão para as próximas 4 semanas")
     st.dataframe(
         prod_forecast[["forecast_week", "week_start", "week_end", "forecast_qty"]],
-        use_container_width=True, hide_index=True,
+        width="stretch", hide_index=True,
     )
 
     summary = data["model_vs_baselines"]
@@ -317,7 +317,7 @@ elif page == "Forecast":
     )
     st.dataframe(
         summary[["method", "mae", "wape", "bias"]].sort_values("wape").round(3),
-        use_container_width=True, hide_index=True,
+        width="stretch", hide_index=True,
     )
 
     st.markdown("### Backtest multi-horizon (rolling-origin, H+1 a H+4)")
@@ -341,7 +341,7 @@ elif page == "Forecast":
         )
         pivot.columns = [f"H+{c}" for c in pivot.columns]
         pivot = pivot.round(3).sort_values("H+1")
-        st.dataframe(pivot, use_container_width=True)
+        st.dataframe(pivot, width="stretch")
         st.caption("WAPE por horizonte — menor é melhor. Vencedor pode variar por horizonte.")
 
 
@@ -383,13 +383,13 @@ elif page == "Estoque":
     ]
     st.dataframe(
         filtered[display_cols].style.apply(highlight_priority, axis=1),
-        use_container_width=True, hide_index=True, height=460,
+        width="stretch", hide_index=True, height=460,
     )
 
     with st.expander("Ver razão da prioridade (auditoria completa)"):
         st.dataframe(
             filtered[["product_id", "product_name", "priority", "priority_reason"]],
-            use_container_width=True, hide_index=True,
+            width="stretch", hide_index=True,
         )
 
 
@@ -414,11 +414,11 @@ elif page == "Qualidade do Modelo":
         xaxis_title="WAPE (menor é melhor)",
         margin={"l": 10, "r": 10, "t": 10, "b": 10},
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
     st.markdown("### Erro por categoria (modelo)")
     by_cat = data["model_by_category"].sort_values("wape", ascending=False)
-    st.dataframe(by_cat.round(3), use_container_width=True, hide_index=True)
+    st.dataframe(by_cat.round(3), width="stretch", hide_index=True)
 
     st.markdown("### Produtos mais difíceis de prever (maior WAPE)")
     by_prod = data["model_by_product"].sort_values("wape", ascending=False).head(10)
@@ -426,7 +426,7 @@ elif page == "Qualidade do Modelo":
     by_prod = by_prod.merge(products, on="product_id", how="left")
     st.dataframe(
         by_prod[["product_id", "product_name", "criticality", "mae", "wape", "bias"]].round(3),
-        use_container_width=True, hide_index=True,
+        width="stretch", hide_index=True,
     )
 
     st.info(
@@ -466,13 +466,13 @@ elif page == "Dados":
     st.markdown("### Distribuição por categoria")
     st.dataframe(
         products["category"].value_counts().rename_axis("category").reset_index(name="n_skus"),
-        use_container_width=True, hide_index=True,
+        width="stretch", hide_index=True,
     )
 
     st.markdown("### Distribuição por criticidade")
     st.dataframe(
         products["criticality"].value_counts().rename_axis("criticality").reset_index(name="n_skus"),
-        use_container_width=True, hide_index=True,
+        width="stretch", hide_index=True,
     )
 
     st.markdown(
