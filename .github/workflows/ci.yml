@@ -41,11 +41,12 @@ jobs:
       - name: Lint (ruff)
         run: ruff check src/ tests/
 
-      - name: Verificação essencial do pipeline (geração + validação de dados)
+      - name: Verificação essencial do pipeline (dados + banco)
         working-directory: src
         run: |
           python generate_data.py
           python validate_data.py
+          python database.py
 
       - name: Testes automatizados (pytest) — inclui smoke test do backtest, não o completo
         run: pytest tests/ -v
