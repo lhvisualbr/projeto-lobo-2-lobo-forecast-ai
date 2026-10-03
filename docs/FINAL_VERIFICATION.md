@@ -3,7 +3,7 @@
 **Projeto:** Projeto Lobo 2 — Lobo Forecast AI
 **Versão:** V1.1.1 — Performance & Final Verification
 **Data da verificação:** execução real nesta sessão de desenvolvimento
-**Status:** publicada no GitHub e validada por clone público limpo; pendente apenas da execução do `full-release-validation` manual antes do congelamento final.
+**Status:** publicada no GitHub, validada por clone público limpo e com `full-release-validation` manual aprovado. Pronta para congelamento final.
 
 Este documento não usa linguagem de marketing — cada item abaixo é uma
 medição ou um resultado real desta sessão, não uma estimativa.
@@ -107,8 +107,8 @@ reduzida. Corrigido isolando a saída em diretório temporário — ver
   por design (ver `LIMITATIONS.md`).
 - `service_factor` único para todos os SKUs, não diferenciado por
   criticidade.
-- CI publicada no GitHub. O `fast-suite` está validado em ambiente limpo;
-  o `full-release-validation` manual ainda será executado antes do freeze final.
+- CI publicada e validada no GitHub. `fast-suite` e
+  `full-release-validation` concluíram com sucesso.
 - Croston/SBA não implementada — média móvel seguiu competitiva mesmo no
   backtest multi-horizon (vence em H+3/H+4).
 - Dados 100% sintéticos — nenhuma métrica valida desempenho em operação
@@ -175,8 +175,8 @@ Todos os critérios da etapa V1.1.1 foram atendidos:
 ## Declaração
 
 **PROJETO LOBO 2 — LOBO FORECAST AI V1.1.1**
-**CANDIDATO A CONGELAMENTO FINAL**
+**VALIDAÇÃO FINAL CONCLUÍDA — PRONTA PARA CONGELAMENTO**
 
 Repositório publicado e reprodução pública validada a partir de clone limpo.
-Pendente apenas da execução e confirmação do `full-release-validation`
-manual no GitHub Actions antes do freeze final. Nenhuma V1.2 foi iniciada.
+`full-release-validation` manual concluído com sucesso no GitHub Actions.
+Nenhuma pendência técnica conhecida permanece. Nenhuma V1.2 foi iniciada.

@@ -303,6 +303,6 @@ Consulte o arquivo `LICENSE` para os termos completos de uso.
 - `service_factor` diferenciado por criticidade do SKU.
 - ETA por pedido em trânsito, para poder considerar `in_transit` na
   classificação de risco de ruptura com segurança (ver `LIMITATIONS.md`).
-- Executar o `full-release-validation` manual no GitHub Actions antes do
-  congelamento final da V1.1.1.
+- `full-release-validation` manual concluído com sucesso no GitHub Actions.
+  A V1.1.1 está pronta para congelamento e criação da release oficial.
 - Deploy do dashboard (Streamlit Community Cloud ou similar).
