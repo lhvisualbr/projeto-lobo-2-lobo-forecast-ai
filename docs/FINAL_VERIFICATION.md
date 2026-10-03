@@ -3,7 +3,7 @@
 **Projeto:** Projeto Lobo 2 — Lobo Forecast AI
 **Versão:** V1.1.1 — Performance & Final Verification
 **Data da verificação:** execução real nesta sessão de desenvolvimento
-**Status:** publicada no GitHub, validada por clone público limpo e com `full-release-validation` manual aprovado. Pronta para congelamento final.
+**Status:** V1.1.1 oficialmente congelada e publicada no GitHub, com tag `v1.1.1`, GitHub Release, pacote ZIP auditado, SHA-256 publicado, clone público reproduzido e `full-release-validation` aprovado.
 
 Este documento não usa linguagem de marketing — cada item abaixo é uma
 medição ou um resultado real desta sessão, não uma estimativa.
@@ -175,8 +175,8 @@ Todos os critérios da etapa V1.1.1 foram atendidos:
 ## Declaração
 
 **PROJETO LOBO 2 — LOBO FORECAST AI V1.1.1**
-**VALIDAÇÃO FINAL CONCLUÍDA — PRONTA PARA CONGELAMENTO**
+**VALIDAÇÃO FINAL CONCLUÍDA — RELEASE OFICIAL CONGELADA E PUBLICADA**
 
-Repositório publicado e reprodução pública validada a partir de clone limpo.
-`full-release-validation` manual concluído com sucesso no GitHub Actions.
-Nenhuma pendência técnica conhecida permanece. Nenhuma V1.2 foi iniciada.
+Repositório publicado, reprodução pública validada a partir de clone limpo e release `v1.1.1` oficialmente publicada.
+`full-release-validation` manual e CI da tag `v1.1.1` concluídos com sucesso no GitHub Actions.
+Pacote oficial ZIP auditado e SHA-256 publicado. Nenhuma pendência técnica conhecida permanece. Nenhuma V1.2 foi iniciada.

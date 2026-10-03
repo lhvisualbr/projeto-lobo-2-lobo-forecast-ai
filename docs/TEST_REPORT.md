@@ -155,4 +155,5 @@ Evidências principais:
 Nenhuma pendência técnica permanece para a V1.1.1. O
 `full-release-validation` manual foi executado no GitHub Actions com
 sucesso, incluindo pipeline completo, backtest multi-horizon e suíte de
-testes. Resta apenas registrar o congelamento formal com tag/release.
+testes. A tag `v1.1.1`, a GitHub Release, o pacote ZIP auditado e o
+SHA-256 oficial foram publicados com sucesso.

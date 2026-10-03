@@ -365,6 +365,98 @@ MULTI-HORIZON BACKTEST (H+1..H+4)
 REPLENISHMENT ENGINE
     ↓
 STREAMLIT DASHBOARD
+```
+
+
+### Reference results
+
+| Metric | Result |
+|---|---:|
+| SKUs analyzed | 30 |
+| 4-week forecasts | 120 |
+| Total forecast demand | 2,402 units |
+| RandomForest one-step-ahead WAPE | 27.56% |
+| Consolidated multi-horizon WAPE | 25.10% |
+| Critical SKUs | 3 |
+| High-priority SKUs | 1 |
+| Medium-priority SKUs | 9 |
+| Low-priority SKUs | 17 |
+
+The model performs best at shorter horizons, while the 4-week moving-average
+baseline slightly outperforms it at H+3 and H+4. These results are reported
+as observed rather than selectively presenting only favorable metrics.
+
+### Quality and validation
+
+V1.1.1 was validated through:
+
+- **64/64 automated tests passed**;
+- Ruff lint: **PASS**;
+- complete data-to-replenishment pipeline: **PASS**;
+- full multi-horizon backtest: **PASS**;
+- GitHub Actions `fast-suite`: **PASS**;
+- manual `full-release-validation`: **PASS**;
+- CI triggered from tag `v1.1.1`: **PASS**;
+- clean public clone reproducibility test: **PASS**;
+- Streamlit dashboard runtime validation: **PASS**.
+
+### Dashboard
+
+The Streamlit application contains five main views:
+
+- Overview;
+- Forecast;
+- Inventory;
+- Model Quality;
+- Data.
+
+Real screenshots of the validated application are available in the
+`images/` directory and throughout this README.
+
+### Reproducibility
+
+The public repository was reproduced from a clean clone on Windows with
+Python 3.12.
+
+The complete setup and execution commands are documented in the
+**Quick Start / Como executar** section above.
+
+No Docker, external database server or environment variables are required
+for V1.1.1.
+
+### Official release
+
+**Version:** `v1.1.1 — Performance & Final Verification`
+
+Official package:
+
+`Projeto_Lobo_2_Lobo_Forecast_AI_V1_1_1.zip`
+
+SHA-256:
+
+`BB913D1D95CA73D44B804C44A1422384029477EA58F0D7864734777055B619BB`
+
+Release package audit:
+
+- 74 tracked files;
+- 74 packaged files;
+- 0 missing files;
+- 0 extra files;
+- ZIP CRC integrity: **PASS**;
+- SHA-256 verification: **PASS**.
+
+[View GitHub Release v1.1.1](https://github.com/lhvisualbr/projeto-lobo-2-lobo-forecast-ai/releases/tag/v1.1.1)
+
+### Limitations
+
+This version does not model supplier contracts, minimum purchase quantities,
+material expiration, warehouse capacity, real operational emergencies or
+order-level ETA.
+
+The replenishment engine provides **decision support**, not autonomous
+purchasing.
+
+---
 
 ## Autoria e licença
 
