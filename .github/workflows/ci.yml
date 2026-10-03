@@ -1,0 +1,92 @@
+name: CI
+
+# Dois workflows distintos e documentados (V1.1.1):
+#
+# 1. `fast-suite` — roda em TODO push e pull request. Rápida (~1 min):
+#    lint + pipeline essencial + suíte de testes. A suíte de testes já
+#    inclui um SMOKE TEST do backtest multi-horizon (poucas origens,
+#    ~4-5s) — não o backtest completo. Rápida o suficiente para não
+#    atrapalhar o fluxo normal de commits.
+#
+# 2. `full-release-validation` — só roda manualmente (workflow_dispatch),
+#    antes de considerar uma versão pronta para release/portfólio. Roda o
+#    PIPELINE COMPLETO, incluindo o backtest multi-horizon com as 41
+#    origens de produção (~40-50s neste ambiente, ver
+#    docs/PERFORMANCE_AUDIT.md) — pesado demais para rodar em todo commit.
+#
+# Não publica nada - apenas verifica que o projeto está íntegro.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  fast-suite:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.12 (versão testada do projeto)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint (ruff)
+        run: ruff check src/ tests/
+
+      - name: Verificação essencial do pipeline (geração + validação de dados)
+        working-directory: src
+        run: |
+          python generate_data.py
+          python validate_data.py
+
+      - name: Testes automatizados (pytest) — inclui smoke test do backtest, não o completo
+        run: pytest tests/ -v
+
+  full-release-validation:
+    # só roda quando disparado manualmente (Actions -> Run workflow) -
+    # nunca em push/PR comum, para não pesar o fluxo normal de commits.
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.12 (versão testada do projeto)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint (ruff)
+        run: ruff check src/ tests/
+
+      - name: Pipeline completo (dados -> banco -> avaliação -> forecast -> reposição)
+        working-directory: src
+        run: |
+          python generate_data.py
+          python validate_data.py
+          python database.py
+          python data_prep.py
+          python run_evaluation.py
+          python forecast.py
+          python replenishment.py
+
+      - name: Backtest multi-horizon COMPLETO (41 origens de produção — validação de release)
+        working-directory: src
+        run: python backtest_multihorizon.py
+
+      - name: Testes automatizados completos, incluindo regressão numérica
+        run: pytest tests/ -v

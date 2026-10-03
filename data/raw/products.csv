@@ -1,0 +1,31 @@
+product_id,product_name,category,unit,unit_cost,lead_time_days,supplier,criticality
+MAT001,"Disco de Corte 4,5 pol",ABRASIVOS,UN,80.4,14,Fornecedor Atlas,HIGH
+MAT002,Disco de Desbaste 7 pol,ABRASIVOS,UN,19.22,10,Fornecedor Bravo,HIGH
+MAT003,"Disco Flap 4,5 pol",ABRASIVOS,UN,25.24,14,Fornecedor Cronos,MEDIUM
+MAT004,Lixa Grão 80,ABRASIVOS,UN,167.0,14,Fornecedor Cronos,HIGH
+MAT005,Escova de Aço Rotativa,ABRASIVOS,UN,42.83,7,Fornecedor Bravo,MEDIUM
+MAT006,Rebolo de Bancada,ABRASIVOS,UN,149.4,5,Fornecedor Cronos,HIGH
+MAT007,"Eletrodo Revestido 3,25mm",SOLDAGEM,KG,174.8,7,Fornecedor Pilar,HIGH
+MAT008,Arame de Solda MIG,SOLDAGEM,KG,37.05,7,Fornecedor Trilha,LOW
+MAT009,Bico de Contato MIG,SOLDAGEM,KG,123.74,3,Fornecedor Trilha,MEDIUM
+MAT010,Máscara de Solda Filtro Escuro,SOLDAGEM,KG,60.33,21,Fornecedor Trilha,MEDIUM
+MAT011,Vareta de Solda TIG,SOLDAGEM,KG,25.56,5,Fornecedor Vetor,MEDIUM
+MAT012,"Eletrodo Revestido 3,25mm (Lote 2)",SOLDAGEM,KG,121.39,21,Fornecedor Trilha,HIGH
+MAT013,Broca de Aço Rápido 8mm,CORTE E USINAGEM,UN,57.95,14,Fornecedor Trilha,HIGH
+MAT014,Lâmina de Serra Fita,CORTE E USINAGEM,UN,71.28,21,Fornecedor Vetor,MEDIUM
+MAT015,Pastilha de Torno,CORTE E USINAGEM,UN,37.98,3,Fornecedor Pilar,LOW
+MAT016,Fresa de Topo 10mm,CORTE E USINAGEM,UN,120.51,7,Fornecedor Pilar,HIGH
+MAT017,Broca de Aço Rápido 5mm,CORTE E USINAGEM,UN,103.45,7,Fornecedor Vetor,LOW
+MAT018,Broca de Aço Rápido 8mm (Lote 2),CORTE E USINAGEM,UN,121.14,10,Fornecedor Trilha,MEDIUM
+MAT019,Bateria para Ferramenta 18V,ELETRICA_BATERIAS,UN,115.16,14,Fornecedor Atlas,MEDIUM
+MAT020,"Cabo Flexível 2,5mm",ELETRICA_BATERIAS,UN,56.45,10,Fornecedor Atlas,MEDIUM
+MAT021,Fita Isolante,ELETRICA_BATERIAS,UN,75.01,5,Fornecedor Atlas,HIGH
+MAT022,Terminal Elétrico Prensado,ELETRICA_BATERIAS,UN,12.85,21,Fornecedor Vetor,LOW
+MAT023,Lâmpada de Sinalização Industrial,ELETRICA_BATERIAS,UN,101.37,10,Fornecedor Bravo,HIGH
+MAT024,Bateria para Ferramenta 18V (Lote 2),ELETRICA_BATERIAS,UN,74.63,7,Fornecedor Pilar,LOW
+MAT025,Luva de Proteção Nitrílica,EPI_CONSUMIVEIS,PAR,18.48,3,Fornecedor Pilar,MEDIUM
+MAT026,Óculos de Segurança Incolor,EPI_CONSUMIVEIS,PAR,31.13,21,Fornecedor Cronos,LOW
+MAT027,Protetor Auricular Tipo Plug,EPI_CONSUMIVEIS,PAR,81.69,14,Fornecedor Vetor,MEDIUM
+MAT028,Máscara Descartável PFF2,EPI_CONSUMIVEIS,PAR,114.38,10,Fornecedor Trilha,LOW
+MAT029,Avental de Raspa de Couro,EPI_CONSUMIVEIS,PAR,173.24,3,Fornecedor Trilha,HIGH
+MAT030,Luva de Proteção Nitrílica (Lote 2),EPI_CONSUMIVEIS,PAR,49.69,14,Fornecedor Bravo,HIGH

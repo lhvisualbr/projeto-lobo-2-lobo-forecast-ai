@@ -1,0 +1,20 @@
+# Versões FIXAS (==), não faixas abertas (>=): este é um projeto de
+# portfólio, e reprodutibilidade exata importa mais do que sempre pegar a
+# versão mais nova de cada biblioteca. Testado com Python 3.12 (ver
+# .python-version). Se for atualizar alguma dependência, reexecute a
+# suíte de testes (`pytest tests/`) e o pipeline completo antes de commitar.
+
+pandas==3.0.2
+numpy==2.4.4
+scikit-learn==1.8.0
+matplotlib==3.10.8
+plotly==7.1.0
+streamlit==1.64.0
+pytest==9.1.1
+ruff==0.16.8
+
+# opcional - apenas para rodar/editar os notebooks em notebooks/
+jupyter==1.1.1
+nbformat==5.11.1
+nbconvert==7.17.1
+ipykernel==7.3.0

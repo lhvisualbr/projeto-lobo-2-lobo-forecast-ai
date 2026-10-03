@@ -1,0 +1,23 @@
+# Ambientes
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Segredos (o projeto principal não depende de nenhum destes)
+.env
+*.key
+*.pem
+credentials*.json
+
+# Cache de testes / notebooks
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Banco gerado (reproduzível via src/database.py — não versionar o binário)
+database/*.db
